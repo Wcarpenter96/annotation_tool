@@ -1,24 +1,34 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { fetchUser } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchUser());
-  },[]);
-  const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(fetchUser());
+    },[]);
+    const auth = useSelector((state) => state.auth);
+    console.log(auth)
+    if (auth == null){
+      return <div>Loading...</div>
+    }
+    else{
     return (
         <BrowserRouter> 
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Dashboard} />
+          <Switch>
+            <PublicRoute component={Login} path="/" exact />
+            <PrivateRoute auth={auth} component={Dashboard} path="/dashboard" exact />
+          </Switch>
         </BrowserRouter>
     );
+    }
 }
 
 export default App;
+
