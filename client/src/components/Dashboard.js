@@ -5,7 +5,7 @@ const Dashboard = () => {
 
   return (
     <div >
-        Hello World!
+        Thanks for logging in!
         <a href="/api/logout">Logout</a>
     </div>
   );

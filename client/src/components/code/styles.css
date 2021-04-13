@@ -1,0 +1,14 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  .box {
+    border: 1px solid gray;
+    font-family: "Fira code", "Fira Mono", monospace;
+    font-size: 14;
+  }
+  h3 {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  
