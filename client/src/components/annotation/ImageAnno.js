@@ -1,11 +1,14 @@
 import React from "react";
-import ReactImageAnnotate from "react-image-annotate";
+import ReactImageAnnotate from "@wcarpenter96/react-image-annotate";
 
 const ImageAnno = () => {
   const get_annos = (e) => {
     var imgs = e["images"][0]["regions"];
     console.log(imgs);
   };
+  const test = (e) => {
+    console.log('hjoi')
+  }
   return (
     <ReactImageAnnotate
       labelImages
@@ -176,6 +179,7 @@ const ImageAnno = () => {
         },
       ]}
       onExit={get_annos}
+      onChange={test}
     />
   );
 };
