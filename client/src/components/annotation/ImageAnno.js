@@ -3,17 +3,14 @@ import ReactImageAnnotate from "@wcarpenter96/react-image-annotate";
 
 const ImageAnno = () => {
   const get_annos = (e) => {
-    var imgs = e["images"][0]["regions"];
+    var imgs = e.images[0].regions;
     console.log(imgs);
   };
-  const test = (e) => {
-    console.log('hjoi')
-  }
   return (
     <ReactImageAnnotate
       labelImages
       regionClsList={["Head", "Arm", "Finger"]}
-      regionTagList={["robot", "human"]}
+      regionTagList={["machine", "human"]}
       images={[
         {
           src: "https://miro.medium.com/max/640/0*B1nMAW5C3-S-W0a8.jpg",
@@ -39,7 +36,7 @@ const ImageAnno = () => {
               h: 0.3076923076923077,
               highlighted: false,
               id: "146649632879996",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "box",
               w: 0.28664148351648355,
               x: 0.581713598901099,
@@ -106,7 +103,7 @@ const ImageAnno = () => {
                 [0.4965626307477758, 0.5354079702880973],
                 [0.4799073509696694, 0.4279457985222296],
               ],
-              tags: ["robot"],
+              tags: ["machine"],
               type: "polygon",
             },
             {
@@ -115,7 +112,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "015955330277619195",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.3896061912225705,
               y: 0.12852664576802508,
@@ -126,7 +123,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "02268316705214879",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.4545405564263323,
               y: 0.2836990595611285,
@@ -137,7 +134,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "011805228862087125",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.42207337382445137,
               y: 0.17398119122257052,
@@ -148,7 +145,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "08922103099389345",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.3198618730407523,
               y: 0.15203761755485892,
@@ -159,7 +156,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "1701163523609155",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.35473403213166144,
               y: 0.13636363636363635,
@@ -170,7 +167,7 @@ const ImageAnno = () => {
               editingLabels: false,
               highlighted: false,
               id: "4854486475087909",
-              tags: ["robot"],
+              tags: ["machine"],
               type: "point",
               x: 0.2910021551724138,
               y: 0.1755485893416928,
@@ -179,7 +176,7 @@ const ImageAnno = () => {
         },
       ]}
       onExit={get_annos}
-      onChange={test}
+      onChange={get_annos}
     />
   );
 };

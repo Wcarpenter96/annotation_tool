@@ -28,7 +28,7 @@ const base_code = `
   h: 0.3076923076923077,
   highlighted: false,
   id: "146649632879996",
-  tags: ["robot"],
+  tags: ["machine"],
   type: "box",
   w: 0.28664148351648355,
   x: 0.581713598901099,
