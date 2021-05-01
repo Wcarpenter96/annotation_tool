@@ -7,7 +7,8 @@ const CodeEditor = () => {
   const annos = useSelector((state) => state.anno);
 
   return (
-    <ReactJson src={annos} />
+    <ReactJson src={annos} 
+    />
   );
 };
 
