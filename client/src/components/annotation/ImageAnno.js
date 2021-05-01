@@ -50,7 +50,7 @@ const ImageAnno = () => {
           src: "https://miro.medium.com/max/640/0*B1nMAW5C3-S-W0a8.jpg",
           regions: review_from,
         }]}
-      onExit={x => dispatch(putAnnos(x))}
+      onExit={x => dispatch(putAnnos(x.images[0].regions))}
       onChange={x => dispatch(putAnnos(x.images[0].regions))}
     />
   );
