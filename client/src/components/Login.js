@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
+    // textAlign: "center",
     color: theme.palette.text.secondary,
   },
   banner: {
@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 100,
   },
   nav: {
-    justifyContent:"right"
-  }
+    justifyContent: "right",
+  },
 }));
 
 const Login = () => {
@@ -36,24 +36,24 @@ const Login = () => {
   return (
     <Container maxWidth="xl" className={classes.root}>
       <Grid container spacing={1}>
-        <Grid container item justify="flex-end" spacing={1} xs={12}>
-          <Button variant="outlined" href="/auth/google">Login with Google</Button>
-        </Grid>
-        <Grid className={classes.banner} item xs={12}>
-          <FadeIn transitionDuration={4000}>
-            <h1 className={classes.title}>U+AI</h1>
-            <h2>An Intelligent CV Data Labeling Tool</h2>
-          </FadeIn>
-        </Grid>
         <Grid item xs={8}>
-          <Paper className={classes.paper}>
+          <Grid className={classes.banner} item xs={12}>
+            <FadeIn transitionDuration={4000}>
+              <h1 className={classes.title}>U+AI</h1>
+              <h2>An Intelligent CV Labeling Tool</h2>
+              <Button variant="outlined" href="/auth/google">
+                Get Started ->
+              </Button>
+            </FadeIn>
+          </Grid>
+          <Grid className={classes.paper}>
             <ImageAnno />
-          </Paper>
+          </Grid>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}>
+          <Grid className={classes.paper}>
             <CodeEditor />
-          </Paper>
+          </Grid>
         </Grid>
       </Grid>
     </Container>
