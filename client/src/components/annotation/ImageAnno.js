@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactImageAnnotate from "@wcarpenter96/react-image-annotate";
+import { putAnnos } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const ImageAnno = () => {
-  const get_annos = (e) => {
-    var imgs = e.images[0].regions;
-    console.log(imgs);
-  };
+
+  const review_from =[
+  {
+    cls: "Head",
+    color: "#f44336",
+    editingLabels: false,
+    h: 0.3244514106583073,
+    highlighted: false,
+    id: "648046743083984",
+    tags: ["human"],
+    type: "box",
+    w: 0.2729648315047022,
+    x: 0.09740154780564263,
+    y: 0.06269592476489028,
+  },
+  {
+    cls: "Head",
+    color: "#f44336",
+    editingLabels: false,
+    h: 0.3076923076923077,
+    highlighted: false,
+    id: "146649632879996",
+    tags: ["machine"],
+    type: "box",
+    w: 0.28664148351648355,
+    x: 0.581713598901099,
+    y: 0.06750392464678179,
+  }
+]
+  const [annos, setAnnos] = useState('x');
+  const dispatch = useDispatch();
+  function get_annos(x) {
+    console.log(x)
+  }
+
   return (
     <ReactImageAnnotate
       labelImages
@@ -14,169 +48,10 @@ const ImageAnno = () => {
       images={[
         {
           src: "https://miro.medium.com/max/640/0*B1nMAW5C3-S-W0a8.jpg",
-          // name: "Demo",
-          regions: [
-            {
-              cls: "Head",
-              color: "#f44336",
-              editingLabels: false,
-              h: 0.3244514106583073,
-              highlighted: false,
-              id: "648046743083984",
-              tags: ["human"],
-              type: "box",
-              w: 0.2729648315047022,
-              x: 0.09740154780564263,
-              y: 0.06269592476489028,
-            },
-            {
-              cls: "Head",
-              color: "#f44336",
-              editingLabels: false,
-              h: 0.3076923076923077,
-              highlighted: false,
-              id: "146649632879996",
-              tags: ["machine"],
-              type: "box",
-              w: 0.28664148351648355,
-              x: 0.581713598901099,
-              y: 0.06750392464678179,
-            },
-            {
-              cls: "Arm",
-              color: "#2196f3",
-              editingLabels: false,
-              highlighted: false,
-              id: "6988119926262109",
-              points: [
-                [0.06506912438781705, 0.9989536312477219],
-                [0.050742918933881054, 0.8966930627859151],
-                [0.03982771477850124, 0.7668666019561431],
-                [0.02481930906485401, 0.7295192639092224],
-                [0.03573451322023381, 0.6583814771531828],
-                [0.07530212828348559, 0.5747945777148364],
-                [0.122373946203561, 0.5490071300157722],
-                [0.16398816204594654, 0.5507855746846732],
-                [0.1871829708761286, 0.572126910711485],
-                [0.22061078360197928, 0.6263694731129651],
-                [0.2410767913933164, 0.6815012578488957],
-                [0.24858099425014002, 0.7135132618891135],
-                [0.2410767913933164, 0.7659773796216925],
-                [0.22811498645880288, 0.8273337206987765],
-                [0.20901337918688823, 0.8673487257490488],
-                [0.19468717373295222, 0.919812843481628],
-                [0.19673377451208593, 0.9989536312477219],
-              ],
-              tags: ["human"],
-              type: "polygon",
-            },
-            {
-              cls: "Arm",
-              color: "#2196f3",
-              editingLabels: false,
-              highlighted: false,
-              id: "8054034243148089",
-              points: [
-                [0.424112163713013, 0.3497914917834167],
-                [0.36914974044526194, 0.380184833292955],
-                [0.37081526842307255, 0.43880056334706463],
-                [0.3908016041568002, 0.515869393603394],
-                [0.41994834376848644, 0.5875108414473058],
-                [0.41328623185724395, 0.6298444242641628],
-                [0.4182828157906758, 0.6591522892912175],
-                [0.4316070396131609, 0.6721780070810198],
-                [0.444931263435646, 0.6710925305985361],
-                [0.4674158911360896, 0.6526394303963164],
-                [0.49073328282543854, 0.6276734712991958],
-                [0.49781177673113375, 0.658066812808734],
-                [0.5132179105258822, 0.6786908659759208],
-                [0.6556205526286918, 0.6374427596415473],
-                [0.6822690002736619, 0.6048784651670419],
-                [0.7730402750643418, 0.5896817944122729],
-                [0.7813679149533951, 0.5527755940078335],
-                [0.7738730390532471, 0.5169548700858776],
-                [0.7405624794970344, 0.4702793813390866],
-                [0.7030880999962948, 0.4789631931989546],
-                [0.6714430684178928, 0.49633081691869085],
-                [0.6331359249282482, 0.4746212872690206],
-                [0.5481939980599055, 0.49850176988365785],
-                [0.4965626307477758, 0.5354079702880973],
-                [0.4799073509696694, 0.4279457985222296],
-              ],
-              tags: ["machine"],
-              type: "polygon",
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "015955330277619195",
-              tags: ["machine"],
-              type: "point",
-              x: 0.3896061912225705,
-              y: 0.12852664576802508,
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "02268316705214879",
-              tags: ["machine"],
-              type: "point",
-              x: 0.4545405564263323,
-              y: 0.2836990595611285,
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "011805228862087125",
-              tags: ["machine"],
-              type: "point",
-              x: 0.42207337382445137,
-              y: 0.17398119122257052,
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "08922103099389345",
-              tags: ["machine"],
-              type: "point",
-              x: 0.3198618730407523,
-              y: 0.15203761755485892,
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "1701163523609155",
-              tags: ["machine"],
-              type: "point",
-              x: 0.35473403213166144,
-              y: 0.13636363636363635,
-            },
-            {
-              cls: "Finger",
-              color: "#4caf50",
-              editingLabels: false,
-              highlighted: false,
-              id: "4854486475087909",
-              tags: ["machine"],
-              type: "point",
-              x: 0.2910021551724138,
-              y: 0.1755485893416928,
-            },
-          ],
-        },
-      ]}
-      onExit={get_annos}
-      onChange={get_annos}
+          regions: review_from,
+        }]}
+      onExit={x => dispatch(putAnnos(x))}
+      onChange={x => dispatch(putAnnos(x.images[0].regions))}
     />
   );
 };
