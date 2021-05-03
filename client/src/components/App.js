@@ -8,7 +8,6 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import MainAppBar from './MainAppBar';
 
 const App = () => {
     const dispatch = useDispatch();

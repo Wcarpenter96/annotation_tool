@@ -4,10 +4,10 @@ import ReactJson from 'react-json-view'
 
 
 const CodeEditor = () => {
-  const annos = useSelector((state) => state.anno);
+  const anno = useSelector((state) => state.anno);
 
   return (
-    <ReactJson src={annos} 
+    <ReactJson src={anno} 
     />
   );
 };

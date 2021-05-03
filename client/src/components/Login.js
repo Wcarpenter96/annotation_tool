@@ -42,7 +42,7 @@ const Login = () => {
               <h1 className={classes.title}>U+AI</h1>
               <h2>An Intelligent CV Labeling Tool</h2>
               <Button variant="outlined" href="/auth/google">
-                Get Started ->
+                get started -&gt;
               </Button>
             </FadeIn>
           </Grid>
