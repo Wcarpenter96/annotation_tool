@@ -9,6 +9,10 @@ _An Intelligent CV Labeling Tool_
 * We will support data uploading soon! See _Up Next_ below:
 
 ## Up Next:
+
+You can track all ongoing bug and feature improvements here:
+https://trello.com/b/q7NUQv3c/kanban
+
 * Data Features
     * Upload csv to platform 
 * Editor Features

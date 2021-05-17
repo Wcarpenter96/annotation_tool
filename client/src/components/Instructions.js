@@ -38,7 +38,7 @@ const Instructions = () => {
                 </Paper>
                 <Button
         variant="contained"
-        color="secondary"
+        color="primary"
         size="small"
         startIcon={<SaveIcon />}
         className={classes.button}
