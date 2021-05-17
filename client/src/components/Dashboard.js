@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import {
   Switch,
   Route,
@@ -20,8 +22,9 @@ import Edit from "./Edit";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    height: '100vh'
   },
-  title:{
+  title: {
     flexGrow: 1,
   },
   button: {
@@ -33,6 +36,15 @@ const useStyles = makeStyles((theme) => ({
   completed: {
     display: 'inline-block',
   },
+  pageContainer: {
+    height: '500px',
+  },
+  btnContainer:{
+    position:'absolute',
+    bottom:0,
+    padding:20,
+    backgroundColor:'white'
+  },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
@@ -43,9 +55,9 @@ const getSteps = () => {
   return ['Upload Data', 'Customize Task', 'Publish Task'];
 }
 
-const getStepContent = (step,steps,history) => {
+const getStepContent = (step, steps, history) => {
   var content = <Typography>Uh oh! Looks like something went wrong.</Typography>
-  switch(steps[step]) {
+  switch (steps[step]) {
     case 'Upload Data':
       history.push('/dashboard/data')
       break;
@@ -62,7 +74,7 @@ export default function Dashboard() {
   const [completed, setCompleted] = React.useState({});
   const steps = getSteps();
   const history = useHistory();
-  useEffect(() => getStepContent(activeStep,steps,history), [activeStep])
+  useEffect(() => getStepContent(activeStep, steps, history), [activeStep])
 
   const totalSteps = () => {
     return steps.length;
@@ -84,8 +96,8 @@ export default function Dashboard() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -112,67 +124,56 @@ export default function Dashboard() {
 
   return (
     <div className={classes.root}>
-       <AppBar position="static" color="transparent">
-        <Toolbar>
-          <Typography variant="h3" className={classes.title}>
-            U+AI
+      <Grid container direction="column" justify="center" alignItems="stretch" spacing={1} >
+        <Grid item >
+          <AppBar position="static" color="transparent">
+            <Toolbar>
+              <Typography variant="h3" className={classes.title}>
+                U+AI
           </Typography>
-          <Button className={classes.logoutButton} variant="outlined" color="inherit" href="/api/logout">Logout</Button>
-        </Toolbar>
-      </AppBar>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepButton onClick={handleStep(index)} completed={completed[index]}>
-              {label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {allStepsCompleted() ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
-          </div>
-        ) : (
-          <div>
-            <Switch>
-          <Route path="/dashboard/data">
-            <Data />
-          </Route>
-          <Route path="/dashboard/editor">
-            <Edit />
-          </Route>
+              <Button className={classes.logoutButton} variant="outlined" color="inherit" href="/api/logout">Logout</Button>
+            </Toolbar>
+          </AppBar>
+        </Grid>
+        <Grid item  >
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton onClick={handleStep(index)} completed={completed[index]}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+        </Grid>
+        <Grid item  >
+        <Switch>
+            <Route path="/dashboard/data">
+              <Data />
+            </Route>
+            <Route path="/dashboard/editor">
+              <Edit />
+            </Route>
           </Switch>
-            <div >
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+        </Grid>
+        <Grid direction="row" container justify="space-between" className={classes.btnContainer}>
+          <Grid item >
+            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              Back
               </Button>
-              <Button
-                variant="contained"
-                color="default"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                Next
+          </Grid>
+          <Grid item >
+            <Button
+              variant="contained"
+              color="default"
+              onClick={handleNext}
+              className={classes.button}
+            >
+              Next
               </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography variant="caption" className={classes.completed}>
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
-                  <Button variant="contained" color="default" onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
-                  </Button>
-                ))}
-            </div>
-          </div>
-        )}
-      </div>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }
