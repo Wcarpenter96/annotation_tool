@@ -4,7 +4,7 @@ import { putAnnos } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const ImageAnno = () => {
+const DemoImageAnno = () => {
 
   const review_from =[
   {
@@ -56,4 +56,4 @@ const ImageAnno = () => {
   );
 };
 
-export default ImageAnno;
+export default DemoImageAnno;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import {
   Switch,
   Route,
@@ -16,6 +15,8 @@ import {
 } from "react-router-dom";
 import Data from "./Data";
 import Edit from "./Edit";
+import Publish from "./Publish";
+
 
 
 
@@ -35,9 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
   completed: {
     display: 'inline-block',
-  },
-  pageContainer: {
-    height: '500px',
   },
   btnContainer:{
     position:'absolute',
@@ -64,14 +62,17 @@ const getStepContent = (step, steps, history) => {
     case 'Customize Task':
       history.push('/dashboard/editor')
       break;
+    case 'Publish Task':
+      history.push('/dashboard/publish')
+      break;
   }
   return content
 };
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({});
   const steps = getSteps();
   const history = useHistory();
   useEffect(() => getStepContent(activeStep, steps, history), [activeStep])
@@ -146,13 +147,16 @@ export default function Dashboard() {
             ))}
           </Stepper>
         </Grid>
-        <Grid item  >
+        <Grid item >
         <Switch>
             <Route path="/dashboard/data">
               <Data />
             </Route>
             <Route path="/dashboard/editor">
               <Edit />
+            </Route>
+            <Route path="/dashboard/publish">
+              <Publish />
             </Route>
           </Switch>
         </Grid>
