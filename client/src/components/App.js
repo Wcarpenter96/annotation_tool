@@ -24,7 +24,7 @@ const App = () => {
         <BrowserRouter >
           <Switch>
             <PublicRoute component={Login} path="/" exact />
-            <PrivateRoute auth={auth} component={Dashboard} path="/dashboard" exact />
+            <PrivateRoute auth={auth} component={Dashboard} path="/dashboard"  />
           </Switch>
         </BrowserRouter>
     );

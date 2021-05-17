@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import ImageAnno from "./annotation/ImageAnno";
-import CodeEditor from "./code/Editor";
+import ImageAnno from "./tools/DemoImageAnno";
+import CodeEditor from "./codeEditors/JSON";
 import FadeIn from "react-fade-in";
 
 const useStyles = makeStyles((theme) => ({
