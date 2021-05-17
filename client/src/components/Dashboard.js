@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -7,7 +7,14 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import {
+  Switch,
+  Route,
+  useHistory
+} from "react-router-dom";
 import Data from "./Data";
+import Edit from "./Edit";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,19 +39,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
+const getSteps = () => {
   return ['Upload Data', 'Customize Task', 'Publish Task'];
 }
 
-function getStepContent(step) {
-  console.log(step)
-}
+const getStepContent = (step,steps,history) => {
+  var content = <Typography>Uh oh! Looks like something went wrong.</Typography>
+  switch(steps[step]) {
+    case 'Upload Data':
+      history.push('/dashboard/data')
+      break;
+    case 'Customize Task':
+      history.push('/dashboard/editor')
+      break;
+  }
+  return content
+};
 
-export default function HorizontalNonLinearStepper() {
+export default function Dashboard() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
   const steps = getSteps();
+  const history = useHistory();
+  useEffect(() => getStepContent(activeStep,steps,history), [activeStep])
 
   const totalSteps = () => {
     return steps.length;
@@ -111,7 +129,6 @@ export default function HorizontalNonLinearStepper() {
           </Step>
         ))}
       </Stepper>
-      <Data/>
       <div>
         {allStepsCompleted() ? (
           <div>
@@ -122,7 +139,14 @@ export default function HorizontalNonLinearStepper() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Switch>
+          <Route path="/dashboard/data">
+            <Data />
+          </Route>
+          <Route path="/dashboard/editor">
+            <Edit />
+          </Route>
+          </Switch>
             <div >
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
