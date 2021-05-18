@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Instructions from "./Instructions";
 import Grid from '@material-ui/core/Grid';
-import ImageAnno from "./tools/ImageAnno";
+import CodeEditor from "./codeEditors/JSON";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ export default function Edit() {
 
   return (
     <div className={classes.root}>
-      <Grid container>
+      <Grid container spacing={1}>
         <Grid item md={6}>
           <Accordion>
             <AccordionSummary
@@ -62,8 +62,8 @@ export default function Edit() {
             </AccordionSummary>
           </Accordion>
         </Grid>
-        <Grid item md={6}>
-          <ImageAnno />
+        <Grid item md={6} >
+          <CodeEditor code={{ settings:true}}/>
         </Grid>
       </Grid>
     </div>

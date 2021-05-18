@@ -1,13 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import ReactJson from 'react-json-view'
 
 
-const CodeEditor = () => {
-  const anno = useSelector((state) => state.anno);
+const CodeEditor = ({code}) => {
 
   return (
-    <ReactJson src={anno} 
+    <ReactJson src={code} name={false}
     />
   );
 };

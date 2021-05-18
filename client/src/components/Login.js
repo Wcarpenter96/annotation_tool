@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import ImageAnno from "./tools/DemoImageAnno";
 import CodeEditor from "./codeEditors/JSON";
 import FadeIn from "react-fade-in";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-
+  const annos = useSelector((state) => state.anno);
   return (
     <Container maxWidth="xl" className={classes.root}>
       <Grid container spacing={1}>
@@ -51,7 +52,7 @@ const Login = () => {
         </Grid>
         <Grid item xs={4}>
           <Grid className={classes.paper}>
-            <CodeEditor />
+            <CodeEditor code={annos} />
           </Grid>
         </Grid>
       </Grid>
