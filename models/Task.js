@@ -6,7 +6,8 @@ const taskSchema = new Schema({
     description: String,
     classes: [classSchema],
     tags:[String],
+    workers: {type: Boolean, default: false},
     _user: { type: Schema.Types.ObjectId, ref: "User" },
   });
   
-  mongoose.model("tasks", taskSchema);
+  mongoose.model("task", taskSchema);

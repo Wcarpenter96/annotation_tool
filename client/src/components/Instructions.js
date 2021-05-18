@@ -8,7 +8,8 @@ import Editor from "rich-markdown-editor";
 import Markdown from "./codeEditors/Markdown";
 import Typography from '@material-ui/core/Typography';
 import SaveIcon from '@material-ui/icons/Save';
-
+import { saveTask } from '../actions'
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,30 +20,33 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(1),
-      }
+    }
 }));
 
 
 const Instructions = () => {
 
+    const dispatch = useDispatch();
     const classes = useStyles();
 
-    function createHTML(markdown) {
-        return { __html: marked(markdown) };
+    const saveDescription = (description) => {
+        console.log('saving...')
+        dispatch(saveTask({ 'description': description, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
     }
 
     return (
         <div className={classes.root}>
-                <Paper item className={classes.markdownContainer}>
-                    <Markdown/>
-                </Paper>
-                <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<SaveIcon />}
-        className={classes.button}
-      ><Typography>Save</Typography></Button>
+            <Paper item className={classes.markdownContainer}>
+                <Markdown />
+            </Paper>
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                startIcon={<SaveIcon />}
+                className={classes.button}
+                onClick={() => saveDescription('description')}
+            ><Typography>Save</Typography></Button>
         </div>
     );
 };
