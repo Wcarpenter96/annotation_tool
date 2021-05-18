@@ -10,7 +10,7 @@ _An Intelligent CV Labeling Tool_
 
 ## Up Next:
 
-You can track all ongoing bug and feature improvements here:
+You can track all ongoing bugs and feature improvements here:
 https://trello.com/b/q7NUQv3c/kanban
 
 * Data Features

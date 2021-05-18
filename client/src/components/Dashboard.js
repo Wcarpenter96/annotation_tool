@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -17,9 +17,6 @@ import Data from "./Data";
 import Edit from "./Edit";
 import Publish from "./Publish";
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -37,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
   completed: {
     display: 'inline-block',
   },
-  btnContainer:{
-    position:'absolute',
-    bottom:0,
-    padding:20,
-    backgroundColor:'white'
+  btnContainer: {
+    position: 'absolute',
+    bottom: 0,
+    padding: 20,
+    backgroundColor: 'white'
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -49,79 +46,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getSteps = () => {
-  return ['Upload Data', 'Customize Task', 'Publish Task'];
-}
-
-const getStepContent = (step, steps, history) => {
-  var content = <Typography>Uh oh! Looks like something went wrong.</Typography>
-  switch (steps[step]) {
-    case 'Upload Data':
-      history.push('/dashboard/data')
-      break;
-    case 'Customize Task':
-      history.push('/dashboard/editor')
-      break;
-    case 'Publish Task':
-      history.push('/dashboard/publish')
-      break;
-  }
-  return content
-};
-
 export default function Dashboard() {
+
+  const steps = [
+    {'label':'Upload Data','path':'/dashboard/data'},
+    {'label':'Customize Task','path':'/dashboard/editor'},
+    {'label':'Publish Task','path':'/dashboard/publish'}
+  ];
+  console.log(window.location.href)
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
-  const [completed, setCompleted] = useState({});
-  const steps = getSteps();
   const history = useHistory();
-  useEffect(() => getStepContent(activeStep, steps, history), [activeStep])
+  
+  const activeStep = () => {
+    const href = window.location.href.toString()
+    for (var i = 0; i < steps.length; i++){
+      if (href.includes(steps[i]['path'])) {
+        return i
+      }
+    }
+    return 0
+  }
 
-  const totalSteps = () => {
-    return steps.length;
-  };
-
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
-
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
-
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
+  const handleStep = (path) => {
+    history.push(path)
+  }
 
   const handleNext = () => {
-    const newActiveStep =
-      isLastStep() && !allStepsCompleted()
-        ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
-        steps.findIndex((step, i) => !(i in completed))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
-  };
+    const href = window.location.href.toString()
+    let j = -1
+    for (var i = 0; i < steps.length-1; i++){
+      if (href.includes(steps[i]['path'])) {
+        j = i
+      }
+    }
+    history.push(steps[j+1]['path'])
+  }
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStep = (step) => () => {
-    setActiveStep(step);
-  };
-
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
+    const href = window.location.href.toString()
+    let j = steps.length
+    for (var i = 1; i < steps.length; i++){
+      if (href.includes(steps[i]['path'])) {
+        j = i
+      }
+    }
+    history.push(steps[j-1]['path'])
+  }
 
   return (
     <div className={classes.root}>
@@ -137,18 +107,18 @@ export default function Dashboard() {
           </AppBar>
         </Grid>
         <Grid item  >
-          <Stepper nonLinear activeStep={activeStep}>
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepButton onClick={handleStep(index)} completed={completed[index]}>
-                  {label}
+          <Stepper nonLinear activeStep={activeStep()} >
+            {steps.map((step, index) => (
+              <Step key={index}>
+                <StepButton onClick={() => handleStep(step['path'])}>
+                  {step['label']}
                 </StepButton>
               </Step>
             ))}
           </Stepper>
         </Grid>
         <Grid item >
-        <Switch>
+          <Switch>
             <Route path="/dashboard/data">
               <Data />
             </Route>
@@ -162,7 +132,7 @@ export default function Dashboard() {
         </Grid>
         <Grid direction="row" container justify="space-between" className={classes.btnContainer}>
           <Grid item >
-            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+            <Button className={classes.button} onClick={handleBack}>
               Back
               </Button>
           </Grid>
@@ -170,10 +140,10 @@ export default function Dashboard() {
             <Button
               variant="contained"
               color="default"
-              onClick={handleNext}
               className={classes.button}
+              onClick={handleNext}
             >
-              Next
+              Next 
               </Button>
           </Grid>
         </Grid>

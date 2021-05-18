@@ -15,7 +15,6 @@ const App = () => {
       dispatch(fetchUser());
     },[]);
     const auth = useSelector((state) => state.auth);
-    console.log(auth)
     if (auth == null){
       return <div>Loading...</div>
     }
