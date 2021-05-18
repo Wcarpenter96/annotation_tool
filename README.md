@@ -1,5 +1,6 @@
 # U+AI
-_An Intelligent CV Labeling Tool_
+
+![U+AI preview demo](u+ai_preview_demo.gif)
 
 ## Get Started
 * Go to https://my-annotation-tool.herokuapp.com/
