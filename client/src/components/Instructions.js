@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import marked from "marked";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +9,7 @@ import Markdown from "./codeEditors/Markdown";
 import Typography from '@material-ui/core/Typography';
 import SaveIcon from '@material-ui/icons/Save';
 import { saveTask } from '../actions'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,21 +23,25 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-const Instructions = () => {
+const Instructions = (props) => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const saveDescription = (description) => {
-        console.log('saving...')
-        dispatch(saveTask({ 'description': description, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
+    const [value, setValue] = useState('');
+
+    const onChange = (x) => {
+        setValue(x)
+    }
+
+    const saveDescription = (value) => {
+        dispatch(saveTask({ 'description': value, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
     }
 
     return (
         <div className={classes.root}>
             <Paper item className={classes.markdownContainer}>
-                <Markdown />
+                <Markdown onChange={(x) => { onChange(x) }}/>
             </Paper>
             <Button
                 variant="contained"
@@ -45,7 +49,7 @@ const Instructions = () => {
                 size="small"
                 startIcon={<SaveIcon />}
                 className={classes.button}
-                onClick={() => saveDescription('description')}
+                onClick={() => saveDescription(value)}
             ><Typography>Save</Typography></Button>
         </div>
     );

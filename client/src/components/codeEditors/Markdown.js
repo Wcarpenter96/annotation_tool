@@ -1,29 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Editor from "rich-markdown-editor";
 import { useDispatch, useSelector } from "react-redux";
-import { updateDescription } from '../../actions'
-import { saveTask } from '../../actions'
+import { saveTask, getTask } from '../../actions'
+import { Skeleton } from '@material-ui/lab';
 
 
-const Markdown = () => {
+const Markdown = (props) => {
 
     const dispatch = useDispatch();
 
-    var description = useSelector((state) => state.task.description);
 
-    const saveChanges = (description) => {
+    useEffect(() => {
+        dispatch(getTask());
+    }, []);
 
-        dispatch(saveTask({ 'description': description, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
+    const description = useSelector((state) => state.task.description);
+
+    const [value, setValue] = useState(description);
+    const handleChange = x => {
+        setValue(x)
+        props.onChange(x);
     }
 
-    const updateChanges = (state) => {
-        dispatch(updateDescription((state())))
+    const saveChanges = (value) => {
+
+        dispatch(saveTask({ 'description': value, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
     }
-    return (
-        <Editor placeholder="Write your Task Description in Markdown here..." 
-        onSave={() => saveChanges(description)}
-        onChange={(state) => updateChanges(state)} />
-    );
+    
+
+    if (description) {
+        console.log(description)
+        return (
+            <div>
+                <Editor 
+                    placeholder="Write your Task Description in Markdown here..."
+                    onSave={() => saveChanges(value)}
+                    onChange={(x) => handleChange(x)}
+                    defaultValue={description} />
+            </div>
+        );
+    } else {
+        return (
+            <div>...</div>
+        )
+    }
 };
 
 export default Markdown;

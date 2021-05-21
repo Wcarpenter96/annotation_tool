@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Instructions from "./Instructions";
 import Grid from '@material-ui/core/Grid';
 import CodeEditor from "./codeEditors/JSON";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +22,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Edit() {
   const classes = useStyles();
+  const description = useSelector((state) => state.task.description);
+
+  const displaySettings = (description, classes, tags) => {
+    return { description, classes, tags }
+  }
 
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
         <Grid item md={6}>
-          <Accordion>
+          <Accordion defaultExpanded	={true}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
@@ -40,7 +46,7 @@ export default function Edit() {
           </Accordion>
           <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />} Î
+              expandIcon={<ExpandMoreIcon />}
               aria-controls="panel2a-content"
               id="panel2a-header"
             >
@@ -63,7 +69,7 @@ export default function Edit() {
           </Accordion>
         </Grid>
         <Grid item md={6} >
-          <CodeEditor code={{ settings:true}}/>
+          <CodeEditor code={displaySettings(description, 'x','y')}/>
         </Grid>
       </Grid>
     </div>

@@ -5,12 +5,11 @@ const Task = mongoose.model("task");
 
 module.exports = (app) => {
   app.get("/api/tasks", requireLogin, async (req, res) => {
-    const tasks = await Task.find({
+    const task = await Task.findOne({
       _user: req.user.id
-    }).select({
-      workers: false
-    });
-    res.send(tasks);
+    })
+
+    res.send(task);
   });
 
   app.post("/api/tasks", requireLogin, async (req, res) => {
