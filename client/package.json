@@ -17,6 +17,7 @@
     "marked": "^2.0.3",
     "prismjs": "^1.23.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-fade-in": "^2.0.1",
     "react-image-annotate": "^1.8.0",
@@ -29,6 +30,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rich-markdown-editor": "^11.8.1",
+    "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

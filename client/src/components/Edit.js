@@ -6,6 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Instructions from "./Instructions";
+import Ontology from "./Ontology";
 import Grid from '@material-ui/core/Grid';
 import CodeEditor from "./codeEditors/JSON";
 import { useSelector } from "react-redux";
@@ -50,12 +51,10 @@ export default function Edit() {
               aria-controls="panel2a-content"
               id="panel2a-header"
             >
-              <Typography className={classes.heading}>Tool Settings</Typography>
+              <Typography className={classes.heading}>Ontology</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Ontology and Tags
-          </Typography>
+            <Ontology/>
             </AccordionDetails>
           </Accordion>
           <Accordion disabled>
