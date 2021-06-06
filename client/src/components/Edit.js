@@ -33,7 +33,7 @@ export default function Edit() {
     <div className={classes.root}>
       <Grid container spacing={1}>
         <Grid item md={6}>
-          <Accordion >
+          <Accordion defaultExpanded	={true} >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"

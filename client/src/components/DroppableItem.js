@@ -3,6 +3,7 @@ import DraggableItem from "./DraggableItem";
 import { Droppable } from "react-beautiful-dnd";
 
 const Column = (props) => {
+
   return (
     <div>
       <Droppable droppableId={props.id}>

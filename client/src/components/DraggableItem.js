@@ -1,24 +1,40 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import CloseIcon from '@material-ui/icons/Close';
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
+import Brightness1Icon from '@material-ui/icons/Brightness1';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    display: 'flex',
+    flexDirection: 'row',
+  }
+}))
 
 const DraggableItem = (props) => {
-  const draggableId = props.id
+
+  const classes = useStyles();
+
+  const draggableId = props.id;
   return (
-    <Draggable draggableId={draggableId} index={props.index}>
+    <Draggable  draggableId={draggableId} index={props.index}>
       {(provided) => (
-        <Paper
+        <Card
+        className={classes.card}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           innerRef={provided.innerRef}
         >
-        {props.item.cls}-
-        {props.item.color}
-        <Button onClick={() => props.deleteItem(draggableId)}><CloseIcon/></Button>
-        </Paper>
+          <Brightness1Icon style={{ color: props.item.color }} /> 
+          <Typography>{props.item.cls}</Typography>
+          <Button onClick={() => props.deleteItem(draggableId)}>
+            <CloseIcon />
+          </Button>
+        </Card>
       )}
     </Draggable>
   );

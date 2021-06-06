@@ -26,8 +26,7 @@ const Ontology = () => {
     setOpen(false);
   };
 
-  const deleteItem = (draggableId, index) => {
-    console.log(draggableId, index);
+  const deleteItem = (draggableId) => {
     const newItemIds = [];
     droppables[0].items.map((item) => {
       if (item.id != draggableId) {
