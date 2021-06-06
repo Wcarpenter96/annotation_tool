@@ -13,7 +13,7 @@ const Column = (props) => {
             {...provided.droppableProps}
             >
             {props.items.map((item,index) => (
-               <DraggableItem key={item.id} id={item.id} item={item} index={index} />
+               <DraggableItem key={item.id} id={item.id} item={item} index={index} deleteItem={props.deleteItem} />
             ))}
             {provided.placeholder}
           </div>
