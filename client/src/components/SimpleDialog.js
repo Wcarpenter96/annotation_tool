@@ -4,7 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import SaveIcon from "@material-ui/icons/Save";
+import AddIcon from "@material-ui/icons/Add";
 import { ColorPicker } from "material-ui-color";
 
 const SimpleDialog = (props) => {
@@ -33,15 +33,15 @@ const SimpleDialog = (props) => {
         variant="outlined"
         onChange={(e) => setClassName(e.target.value)}
       />
-      <ColorPicker onChange={x => setColor(x.value)} value={color} disableAlpha />
+      <ColorPicker onChange={x => setColor(x.css.backgroundColor)} value={color} disableAlpha />
       <Button
         variant="contained"
         color="primary"
         size="small"
-        startIcon={<SaveIcon />}
+        startIcon={<AddIcon />}
         onClick={saveItem}
       >
-        <Typography>Save</Typography>
+        <Typography>Add</Typography>
       </Button>
     </Dialog>
   );
