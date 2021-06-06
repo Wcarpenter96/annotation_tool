@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import DroppableItem from "./DroppableItem";
 import SimpleDialog from "./SimpleDialog";
 import { DragDropContext } from "react-beautiful-dnd";
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
 
 const Ontology = () => {
   const classes = [
@@ -42,6 +41,26 @@ const Ontology = () => {
           newItems.push(item);
         }
       });
+    });
+    setDroppables([{ items: newItems, id: droppables[0].id }]);
+  };
+
+  function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  const addItem = (className, color) => {
+    const newItems = [];
+    droppables[0].items.map((item) => {
+      newItems.push(item);
+    });
+    newItems.push({
+      cls: className,
+      color: color,
+      id: uuidv4()
     });
     setDroppables([{ items: newItems, id: droppables[0].id }]);
   };
@@ -88,8 +107,10 @@ const Ontology = () => {
           );
         })}
       </DragDropContext>
-      <Button onClick={handleClickOpen}><AddIcon/></Button>
-      <SimpleDialog open={open} onClose={handleClose} />
+      <Button onClick={handleClickOpen}>
+        <AddIcon />
+      </Button>
+      <SimpleDialog open={open} onClose={handleClose} addItem={addItem} />
     </div>
   );
 };
