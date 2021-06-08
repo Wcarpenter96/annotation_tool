@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const classSchema = new Schema({
     cls: String,
-    color: String
+    color: String,
+    _id: String
   });
   
   module.exports = classSchema

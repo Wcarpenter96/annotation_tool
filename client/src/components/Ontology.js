@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import DroppableItem from "./DroppableItem";
 import SimpleDialog from "./SimpleDialog";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -7,7 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import Paper from "@material-ui/core/Paper";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { updateClasses } from '../actions'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,20 +25,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Ontology = () => {
-  const clss = [
-    { cls: "test1", color: "red", id: "11" },
-    { cls: "test2", color: "blue", id: "22" },
-    { cls: "test3", color: "green", id: "33" },
-  ];
+
+  const dispatch = useDispatch()
+
+
+  const classlist = useSelector((state) => state.task.classes);
 
   const classes = useStyles();
 
-  const initialDroppables = [{ items: clss, id: "1" }];
-
-  const [droppables, setDroppables] = useState(initialDroppables);
+  const [items, setItems] = useState(classlist);
 
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    dispatch(updateClasses(items||classlist))
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,20 +51,20 @@ const Ontology = () => {
 
   const deleteItem = (draggableId) => {
     const newItemIds = [];
-    droppables[0].items.map((item) => {
-      if (item.id != draggableId) {
-        newItemIds.push(item.id);
+    items.map((item) => {
+      if (item._id != draggableId) {
+        newItemIds.push(item._id);
       }
     });
     const newItems = [];
     newItemIds.map((newItemId) => {
-      droppables[0].items.map((item) => {
-        if (newItemId === item.id) {
+      items.map((item) => {
+        if (newItemId === item._id) {
           newItems.push(item);
         }
       });
     });
-    setDroppables([{ items: newItems, id: droppables[0].id }]);
+    setItems(newItems);
   };
 
   function uuidv4() {
@@ -73,16 +77,17 @@ const Ontology = () => {
 
   const addItem = (className, color) => {
     const newItems = [];
-    droppables[0].items.map((item) => {
+    items.map((item) => {
       newItems.push(item);
     });
     newItems.push({
       cls: className,
       color: color,
-      id: uuidv4(),
+      _id: uuidv4(),
     });
-    setDroppables([{ items: newItems, id: droppables[0].id }]);
+    setItems(newItems);
   };
+
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -96,52 +101,36 @@ const Ontology = () => {
       return;
     }
     const newItemIds = [];
-    droppables[0].items.map((item) => {
-      newItemIds.push(item.id);
+    items.map((item) => {
+      newItemIds.push(item._id);
     });
     newItemIds.splice(source.index, 1);
     newItemIds.splice(destination.index, 0, draggableId);
     const newItems = [];
     newItemIds.map((newItemId) => {
-      droppables[0].items.map((item) => {
-        if (newItemId === item.id) {
+      items.map((item) => {
+        if (newItemId === item._id) {
           newItems.push(item);
         }
       });
     });
-    setDroppables([{ items: newItems, id: droppables[0].id }]);
+    setItems(newItems);
   };
 
   return (
     <div className={classes.root}>
       <Paper className={classes.ontologyContainer}>
         <DragDropContext onDragEnd={onDragEnd}>
-          {droppables.map((droppable) => {
-            return (
               <DroppableItem
-                key={droppable.id}
-                id={droppable.id}
-                items={droppable.items}
-                deleteItem={deleteItem}
-              />
-            );
-          })}
+                id='1'
+                items={items}
+                deleteItem={deleteItem}/>
         </DragDropContext>
         <Button onClick={handleClickOpen}>
           <AddIcon />
         </Button>
         <SimpleDialog open={open} onClose={handleClose} addItem={addItem} />
       </Paper>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<SaveIcon />}
-        className={classes.button}
-        onClick={() => console.log("hi")}
-      >
-        <Typography>Save</Typography>
-      </Button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { FETCH_TASK } from "../actions/types";
 import { UPDATE_DESCRIPTION } from "../actions/types";
+import { UPDATE_CLASSES } from "../actions/types";
 
 
 export default function (state = {'description':'','class':'','tags':''}, action) {
@@ -8,6 +9,8 @@ export default function (state = {'description':'','class':'','tags':''}, action
       return action.payload;
     case UPDATE_DESCRIPTION:
       return {...state,'description':action.payload}
+    case UPDATE_CLASSES:
+      return {...state,'classes':action.payload}
     default:
       return state;
   }

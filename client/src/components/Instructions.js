@@ -9,7 +9,7 @@ import Markdown from "./codeEditors/Markdown";
 import Typography from '@material-ui/core/Typography';
 import SaveIcon from '@material-ui/icons/Save';
 import { useDispatch, useSelector } from "react-redux";
-import { saveTask, getTask } from '../actions'
+import { updateDescription } from '../actions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,44 +26,27 @@ const useStyles = makeStyles((theme) => ({
 
 const Instructions = () => {
 
+    const dispatch = useDispatch()
     const classes = useStyles();
-    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(updateDescription(value||description))
+    });
 
     const [value, setValue] = useState('');
 
-    useEffect(() => {
-        dispatch(getTask());
-    }, []);
-
     const description = useSelector((state) => state.task.description);
-
-    const onChange = (x) => {
-        setValue(x)
-    }
-
-    const onSave = (x) => {
-        dispatch(saveTask({ 'description': x, 'classes': [{ 'cls': 'asdf', 'color': 'ddfd' }], 'tags': ['asdf', 'asdf', 'cdcdd'] }))
-    }
 
     if (description){
     return (
         <div className={classes.root}>
             <Paper item className={classes.markdownContainer}>
-                <Markdown onSave={(x) => onSave(x)} onChange={(x) => onChange(x)} placeholder="Write your Task Description in Markdown here..." value={description}/>
+                <Markdown  onSave={(x) => console.log(x)} onChange={(x) => setValue(x)} placeholder="Write your Task Description in Markdown here..." value={description}/>
             </Paper>
-            <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                startIcon={<SaveIcon />}
-                className={classes.button}
-                onClick={() => onSave(value||description)}
-            ><Typography>Save</Typography></Button>
         </div>
     );
     }else{
-
-        return <div>Loading...</div>
+        return <div>Loading Description...</div>
     }
 };
 
