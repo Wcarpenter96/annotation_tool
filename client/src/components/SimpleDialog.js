@@ -8,7 +8,6 @@ import AddIcon from "@material-ui/icons/Add";
 import { ColorPicker } from "material-ui-color";
 
 const SimpleDialog = (props) => {
-
   const [className, setClassName] = useState("");
 
   const getRandColor = () => {
@@ -17,12 +16,13 @@ const SimpleDialog = (props) => {
     );
   };
 
-  const [color, setColor] = useState(getRandColor)
+  const [color, setColor] = useState(getRandColor());
 
   const saveItem = () => {
-    props.addItem(className,color)
+    props.addItem(className, color);
     props.onClose()
-  }
+    setColor(getRandColor());
+  };
 
   return (
     <Dialog onClose={props.onClose} open={props.open}>
@@ -33,7 +33,11 @@ const SimpleDialog = (props) => {
         variant="outlined"
         onChange={(e) => setClassName(e.target.value)}
       />
-      <ColorPicker onChange={x => setColor(x.css.backgroundColor)} value={color} disableAlpha />
+      <ColorPicker
+        onChange={(x) => setColor(x.css.backgroundColor)}
+        value={color}
+        disableAlpha
+      />
       <Button
         variant="contained"
         color="primary"

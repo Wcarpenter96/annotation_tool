@@ -7,18 +7,18 @@ import Typography from "@material-ui/core/Typography";
 import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      width: '100%',
+    width: "100%",
   },
   ontologyContainer: {
-      padding: 40
+    padding: 40,
   },
   button: {
-      margin: theme.spacing(1),
-  }
+    margin: theme.spacing(1),
+  },
 }));
 
 const Ontology = () => {
@@ -36,12 +36,13 @@ const Ontology = () => {
 
   const [open, setOpen] = useState(false);
 
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
-    setOpen(false);
+  const handleClose = () => {
+      setOpen(false);
   };
 
   const deleteItem = (draggableId) => {
