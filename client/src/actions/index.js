@@ -27,7 +27,7 @@ export const saveTask = (values) => async (dispatch) => {
 
 export const putUnits = (f) => async (dispatch) => {
   const res = await axios.post("/api/units", f);
-  dispatch({ type: PUT_UNITS, payload: res });
+  dispatch({ type: PUT_UNITS, payload: res.data });
 };
 
 
