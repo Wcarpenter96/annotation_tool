@@ -6,8 +6,10 @@
 * Go to https://my-annotation-tool.herokuapp.com/
 * Test out the annotation tool!
     * More instructions on how to use the tool: https://universaldatatool.github.io/react-image-annotate/#usage
-* When you're ready, click _Get Started ->_
-* We will support data uploading soon! See _Up Next_ below:
+* When you're ready, click _Get Started ->_ and create your profile with Google.
+* Click "Upload Data" to upload your data.
+* Go to the "Customize Task" page to edit your instructions and ontology.
+* WIP: Previewing and Publishing your task. See below to monitor the progress of these features:
 
 ## Up Next:
 
