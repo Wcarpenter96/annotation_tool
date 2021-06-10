@@ -5,6 +5,7 @@ import { PUT_ANNOS } from "./types";
 import { FETCH_TASK } from "./types";
 import { UPDATE_DESCRIPTION } from "./types";
 import { UPDATE_CLASSES } from "./types";
+import { PUT_UNITS } from "./types";
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get("/api/current_user");
@@ -24,6 +25,10 @@ export const saveTask = (values) => async (dispatch) => {
   dispatch({ type: FETCH_TASK, payload: res.data });
 };
 
+export const putUnits = (f) => async (dispatch) => {
+  const res = await axios.post("/api/units", f);
+  dispatch({ type: PUT_UNITS, payload: res });
+};
 
 
 export const getTask = () => async (dispatch) => {
