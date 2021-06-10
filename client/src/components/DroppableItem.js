@@ -6,7 +6,7 @@ const Column = (props) => {
 
   return (
     <div>
-      <Droppable droppableId={props.id}>
+      <Droppable droppableId={props.id} key={props.id}>
         {(provided) => (
           <div 
             ref={provided.innerRef}
@@ -15,7 +15,7 @@ const Column = (props) => {
             >
             {props.items.map((item,index) => (
               <div>
-               <DraggableItem key={item.id} id={item._id} item={item} index={index} deleteItem={props.deleteItem} />
+               <DraggableItem key={item._id} id={item._id} item={item} index={index} deleteItem={props.deleteItem} />
                </div>
             ))}
             {provided.placeholder}
