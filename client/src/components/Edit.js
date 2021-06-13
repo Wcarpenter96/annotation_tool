@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
   button: {
-    margin: theme.spacing(3),
+    margin: theme.spacing(1),
   },
 }));
 
@@ -56,16 +56,18 @@ export default function Edit() {
   if (description) {
     return (
       <div className={classes.root}>
+        <div>
         <Button
           variant="contained"
           color="primary"
-          size="small"
+          size="medium"
           startIcon={<SaveIcon />}
           className={classes.button}
           onClick={onSave}
         >
           <Typography>Save</Typography>
         </Button>
+        </div>
         <Grid container spacing={1}>
           <Grid item md={6}>
             <Accordion defaultExpanded={true}>
@@ -90,7 +92,7 @@ export default function Edit() {
                 aria-controls="panel2a-content"
                 id="panel2a-header"
               >
-                <Typography className={classes.heading}>Ontology</Typography>
+                <Typography className={classes.heading}>Classifications</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Ontology />

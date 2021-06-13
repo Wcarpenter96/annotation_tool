@@ -1,8 +1,16 @@
 import React from "react";
 import DraggableItem from "./DraggableItem";
 import { Droppable } from "react-beautiful-dnd";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    padding: theme.spacing(1)
+  }
+}));
 
 const Column = (props) => {
+
 
   return (
     <div>

@@ -5,9 +5,13 @@ const Task = mongoose.model("task");
 
 module.exports = (app) => {
   app.get("/api/tasks", requireLogin, async (req, res) => {
-    const task = await Task.findOne({
+    const opts = {
+      new: true,
+      upsert: true
+    }
+    const task = await Task.findOneAndUpdate({
       _user: req.user.id
-    })
+    },{},opts)
     res.send(task);
   });
 

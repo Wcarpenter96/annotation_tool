@@ -119,7 +119,6 @@ export default function Dashboard() {
                 color="inherit"
                 startIcon={<VisibilityIcon />}
                 className={classes.previewButton}
-                onClick={() => console.log("hi")}
                 disabled={true}
               >
                 <Typography>Preview</Typography>

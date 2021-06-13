@@ -11,6 +11,19 @@ const useStyles = makeStyles((theme) => ({
   card: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    border: '1px solid #e6e6e6',
+    padding:theme.spacing(1)
+  },
+  icon:{
+    flexGrow:1
+  },
+  name:{
+    flexGrow:10
+  },
+  button:{
+    flexGrow:1
   }
 }))
 
@@ -22,16 +35,16 @@ const DraggableItem = (props) => {
   return (
     <Draggable  draggableId={draggableId} index={props.index}>
       {(provided) => (
-        <Card
+        <Card 
         className={classes.card}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           innerRef={provided.innerRef}
         >
-          <Brightness1Icon style={{ color: props.item.color }} /> 
-          <Typography>{props.item.cls}</Typography>
-          <Button onClick={() => props.deleteItem(draggableId)}>
+          <Brightness1Icon className={classes.icon} style={{ color: props.item.color }} /> 
+          <Typography className={classes.name} >{props.item.cls}</Typography>
+          <Button className={classes.button} onClick={() => props.deleteItem(draggableId)}>
             <CloseIcon />
           </Button>
         </Card>

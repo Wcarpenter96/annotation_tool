@@ -5,9 +5,9 @@ import { FETCH_TASK } from "../actions/types";
 export default function (state = [], action) {
   switch (action.type) {
     case FETCH_TASK:
-      return action.payload.units; 
+      return action.payload.units || []; 
     case PUT_UNITS:
-      return action.payload || false;
+      return action.payload || [];
     default:
       return state;
   }

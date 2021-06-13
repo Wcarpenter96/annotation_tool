@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import DroppableItem from "./DroppableItem";
 import SimpleDialog from "./SimpleDialog";
 import { DragDropContext } from "react-beautiful-dnd";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { updateClasses } from '../actions'
-
+import { updateClasses } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,19 +24,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Ontology = () => {
 
-  const dispatch = useDispatch()
-
-
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  
   const classlist = useSelector((state) => state.task.classes);
 
-  const classes = useStyles();
-
   const [items, setItems] = useState(classlist);
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(updateClasses(items||classlist))
+    dispatch(updateClasses(items || classlist));
   });
 
   const handleClickOpen = () => {
@@ -46,7 +41,7 @@ const Ontology = () => {
   };
 
   const handleClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
 
   const deleteItem = (draggableId) => {
@@ -88,7 +83,6 @@ const Ontology = () => {
     setItems(newItems);
   };
 
-
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -120,12 +114,13 @@ const Ontology = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.ontologyContainer}>
-        <DragDropContext onDragEnd={onDragEnd}>
-              <DroppableItem
-                id='1'
-                items={items}
-                deleteItem={deleteItem}/>
-        </DragDropContext>
+        {items.length ? (
+          <DragDropContext onDragEnd={onDragEnd}>
+            <DroppableItem id="1" items={items} deleteItem={deleteItem} />
+          </DragDropContext>
+        ) : (
+          <Typography>Add a class that you will use for your task.</Typography>
+        )}
         <Button onClick={handleClickOpen}>
           <AddIcon />
         </Button>
