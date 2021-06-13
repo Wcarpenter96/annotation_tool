@@ -8,11 +8,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Instructions from "./Instructions";
 import Ontology from "./Ontology";
 import Grid from "@material-ui/core/Grid";
-import CodeEditor from "./codeEditors/JSON";
 import { useDispatch, useSelector } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import { saveTask, getTask } from "../actions";
+import Loader from "./Loader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,6 +112,6 @@ export default function Edit() {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return <Loader/>
   }
 }

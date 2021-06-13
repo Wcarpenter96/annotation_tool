@@ -4,10 +4,10 @@ import FileReader from "./FileReader";
 import { useDispatch, useSelector } from "react-redux";
 import { getTask } from "../actions";
 import DataHelper from "./DataHelper";
-
+import { makeStyles } from '@material-ui/core/styles';
+import Loader from "./Loader";
 
 const Data = () => {
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Data = () => {
 
   if (description) {
     return (
-      <div >
+      <div>
         <FileReader />
         {units.length ? (
           <div style={{ height: 650, width: "100%" }}>
@@ -53,7 +53,9 @@ const Data = () => {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <Loader/>
+    );
   }
 };
 

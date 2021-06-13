@@ -8,6 +8,7 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import Loader from "./Loader";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const App = () => {
     },[]);
     const auth = useSelector((state) => state.auth);
     if (auth == null){
-      return <div>Loading...</div>
+      return <Loader/>
     }
     else{
     return (
