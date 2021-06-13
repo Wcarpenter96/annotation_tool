@@ -8,7 +8,6 @@ module.exports = (app) => {
     const task = await Task.findOne({
       _user: req.user.id
     })
-
     res.send(task);
   });
 

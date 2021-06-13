@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(3),
   },
 }));
 

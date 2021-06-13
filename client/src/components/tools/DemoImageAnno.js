@@ -36,9 +36,6 @@ const DemoImageAnno = () => {
 ]
   const [annos, setAnnos] = useState('x');
   const dispatch = useDispatch();
-  function get_annos(x) {
-    console.log(x)
-  }
 
   return (
     <ReactImageAnnotate

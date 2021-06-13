@@ -3,6 +3,9 @@ const requireLogin = require("../middlewares/requireLogin");
 const multer = require("multer");
 const csvtojson = require("csvtojson");
 
+const Task = mongoose.model("task");
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '')
@@ -24,14 +27,36 @@ function uuidv4() {
 }
 
 module.exports = (app) => {
-  
   app.post("/api/units", requireLogin, upload.single('file'), async (req, res) => {
-    const csvDataRaw = await csvtojson().fromFile("tmp.csv")
+    const jsonData = req.body
+    var csvDataRaw = await csvtojson().fromFile("tmp.csv")
+    if (Array.isArray(jsonData)){
+      csvDataRaw = jsonData
+    }
     const csvData = []
     csvDataRaw.forEach(data => {
+      if ('id' in data) {
+        res.status(400).send(new Error('Column id name already exists!'));
+      }
       data['id'] = uuidv4()
       csvData.push(data)
     })
-    res.send({'page_0':csvData.slice(0,10)});
+    const user = req.user.id
+    const opts = {
+      new: true,
+      upsert: true
+    }
+    // try {
+      const task = await Task.findOneAndUpdate({
+        _user: user
+      },{
+        units: csvData,
+        _user: user
+      },opts);
+      // res.send({'page_0':csvData.slice(0,10)});
+      res.send(csvData);
+    // } catch (err) {
+    //   res.status(422).send(err);
+    // }
   });
 };
