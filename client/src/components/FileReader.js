@@ -7,29 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 const FileReader = () => {
   const dispatch = useDispatch();
-  // const [csvfile, setCsvfile] = useState(false);
   const [open, setOpen] = useState(false);
 
   const onClickHandler = (files) => {
     const csvfile = files[0]
     const data = new FormData();
     data.append("file", csvfile);
-    console.log(data);
     dispatch(putUnits(data));
     setOpen(false)
   };
-
-  // const onClickHandler = () => {
-  //   const data = new FormData();
-  //   data.append("file", csvfile);
-  //   console.log(data);
-  //   dispatch(putUnits(data));
-  // };
-
-  // const onChangeHandler = (event) => {
-  //   console.log(event.target.files[0]);
-  //   setCsvfile(event.target.files[0]);
-  // };
 
   return (
     <div>
@@ -46,10 +32,6 @@ const FileReader = () => {
         onClose={() => setOpen(false)}
         onSave={onClickHandler}
       />
-      {/* <Button variant="contained" color="primary" onClick={onClickHandler}>
-        Upload Data
-      </Button>
-      <input type="file" name="file" onChange={onChangeHandler}/> */}
     </div>
   );
 };

@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import Button from "@material-ui/core/Button";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,8 +23,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  button: {
-    marginRight: theme.spacing(1),
+  lButton: {
+    position: 'fixed',
+    bottom: theme.spacing(3),
+    left: theme.spacing(3),
+  },
+  rButton: {
+    position: 'fixed',
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
   },
   previewButton: {
     marginRight: theme.spacing(1),
@@ -111,9 +119,10 @@ export default function Dashboard() {
                 color="inherit"
                 startIcon={<VisibilityIcon />}
                 className={classes.previewButton}
-                onClick={()=>console.log('hi')}
+                onClick={() => console.log("hi")}
                 disabled={true}
-              ><Typography>Preview</Typography>
+              >
+                <Typography>Preview</Typography>
               </Button>
               <Button
                 className={classes.logoutButton}
@@ -150,29 +159,23 @@ export default function Dashboard() {
             </Route>
           </Switch>
         </Grid>
-        <Grid
-          direction="row"
-          container
-          justify="space-between"
-          className={classes.btnContainer}
-        >
-          <Grid item>
-            <Button className={classes.button} onClick={handleBack}>
-              Back
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="default"
-              className={classes.button}
-              onClick={handleNext}
-            >
-              Next
-            </Button>
-          </Grid>
-        </Grid>
       </Grid>
+      <Fab
+        size="large"
+        variant="extended"
+        className={classes.lButton}
+        onClick={handleBack}
+      >
+        &lt; Back 
+      </Fab>
+      <Fab
+        size="large"
+        variant="extended"
+        className={classes.rButton}
+        onClick={handleNext}
+      >
+        Next &gt;
+      </Fab>
     </div>
   );
 }
