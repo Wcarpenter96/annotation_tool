@@ -34,10 +34,10 @@ const taskSchema = new Schema({
     '\n' +
     '---\n' +
     '\n' +
-    '| Example | Description |\n' +
-    '|----|----|\n' +
-    '| Example 1 | Description 1 |\n' +
-    '| Example 2 | Description 2 |\n' +
+    // '| Example | Description |\n' +
+    // '|----|----|\n' +
+    // '| Example 1 | Description 1 |\n' +
+    // '| Example 2 | Description 2 |\n' +
     '\n' +
     '\\\n'},
     classes: [classSchema],
