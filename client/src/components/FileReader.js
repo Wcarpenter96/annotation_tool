@@ -45,6 +45,8 @@ const FileReader = () => {
         open={open}
         onClose={() => setOpen(false)}
         onSave={onClickHandler}
+        dropzoneText={"Drag and drop your .csv file here or click"}
+        previewText={"Make sure your .csv has an 'image_url' column with links to your images and does not contain an 'id' column"}
       />
     </div>
   );
