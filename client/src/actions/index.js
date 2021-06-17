@@ -5,7 +5,9 @@ import { PUT_ANNOS } from "./types";
 import { FETCH_TASK } from "./types";
 import { UPDATE_DESCRIPTION } from "./types";
 import { UPDATE_CLASSES } from "./types";
+import { UPDATE_TAGS } from "./types";
 import { PUT_UNITS } from "./types";
+
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get("/api/current_user");
@@ -18,6 +20,10 @@ export const updateDescription = (description) => async (dispatch) => {
 
 export const updateClasses = (classes) => async (dispatch) => {
   dispatch({ type: UPDATE_CLASSES, payload: classes });
+};
+
+export const updateTags = (tags) => async (dispatch) => {
+  dispatch({ type: UPDATE_TAGS, payload: tags });
 };
 
 export const saveTask = (values) => async (dispatch) => {

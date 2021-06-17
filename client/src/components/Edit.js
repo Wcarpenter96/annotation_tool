@@ -13,6 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import { saveTask, getTask } from "../actions";
 import Loader from "./Loader";
+import Tags from "./Tags"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,13 +39,14 @@ export default function Edit() {
 
   const description = useSelector((state) => state.task.description);
   const classlist = useSelector((state) => state.task.classes);
+  const tags = useSelector((state) => state.task.tags);
 
   const onSave = () => {
     dispatch(
       saveTask({
         description: description,
         classes: classlist,
-        tags: ["asdf", "asdf", "cdcdd"],
+        tags: tags
       })
     );
   };
@@ -96,6 +98,12 @@ export default function Edit() {
               </AccordionSummary>
               <AccordionDetails>
                 <Ontology />
+              </AccordionDetails>
+              <AccordionSummary>
+              <Typography className={classes.heading}>Tags</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Tags/>
               </AccordionDetails>
             </Accordion>
             <Accordion disabled>
