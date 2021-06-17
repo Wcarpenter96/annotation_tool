@@ -7,9 +7,10 @@
 * Test out the annotation tool!
     * More instructions on how to use the tool: https://universaldatatool.github.io/react-image-annotate/#usage
 * When you're ready, click _Get Started ->_ and create your profile with Google.
-* Click "Upload Data" to upload your data.
+* Click "Upload Data" to upload your data. The column _image_url_ should contain the links to your images.
 * Go to the "Customize Task" page to edit your instructions and ontology.
-* WIP: Previewing and Publishing your task. See below to monitor the progress of these features:
+* Once you have uploaded data and customized your task, click the "PREVIEW" button (top right) to preview your task.
+* WIP: Publishing your task. See below to monitor the progress of these features:
 
 ## Up Next:
 
@@ -19,7 +20,8 @@ https://trello.com/b/q7NUQv3c/kanban
 * Data Features
     * Upload csv to platform 
 * Editor Features
-    * Liquid logic
+    * Title
+    * Customize which column has the links to your images
     * Additional Tool specific settings
         * Ontology
         * Tags
