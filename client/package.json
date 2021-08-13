@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build --outDir build",
+    "build": "vite build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
