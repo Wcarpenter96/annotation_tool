@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware,compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
@@ -22,7 +22,15 @@ LogRocket.identify('85608474-ce77-4a88-863f-dab2241403c7', {
   developer:true
 });
 
-const store = createStore(reducers, {}, compose(applyMiddleware(reduxThunk),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),applyMiddleware(LogRocket.reduxMiddleware())));
+console.log(window.__REDUX_DEVTOOLS_EXTENSION__);
+const middlewares = compose(
+	applyMiddleware(reduxThunk),
+	// https://stackoverflow.com/questions/53514758/redux-typeerror-cannot-read-property-apply-of-undefined
+	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
+	applyMiddleware(LogRocket.reduxMiddleware()),
+);
+
+const store = createStore(reducers, {}, middlewares);
 
 ReactDOM.render(
   <Provider store={store}>
