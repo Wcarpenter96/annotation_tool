@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Loader from './Loader'
 import { useDispatch, useSelector } from "react-redux";
 import { getTask } from "../actions";
-import ReactImageAnnotate from "@wcarpenter96/react-image-annotate";
+import ReactImageAnnotate from "react-image-annotate";
 
 const Preview = () => {
 
@@ -30,7 +30,7 @@ const Preview = () => {
     if (description){
     return (
         <ReactImageAnnotate
-            taskDescription={description}
+            taskDescription='test'
             labelImages
             regionClsList={getClasslist()}
             regionTagList={tags}

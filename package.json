@@ -26,6 +26,9 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-image-annotate": "^1.8.0",
+    "react-markdown": "^7.1.0",
+    "vite": "^2.6.13"
   }
 }

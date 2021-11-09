@@ -4,8 +4,20 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  proxy: {
-    '/api': 'http://localhost:5000',
-    '/auth/google': 'http://localhost:5000',
-  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000'
+        // changeOrigin: true,
+        // secure: false,
+        // ws: true,
+      },
+      '/auth/google': {
+        target: 'http://localhost:5000'
+        // changeOrigin: true,
+        // secure: false,
+        // ws: true,
+      }
+    }
+  }
 });
