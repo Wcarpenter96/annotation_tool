@@ -16,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mui/core": "^5.0.0-alpha.54",
+    "@mui/material": "^5.1.0",
     "body-parser": "^1.19.0",
     "concurrently": "^6.0.2",
     "cookie-session": "^1.4.0",

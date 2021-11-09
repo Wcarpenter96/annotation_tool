@@ -24,7 +24,8 @@ module.exports = (app) => {
     const {
       description,
       classes,
-      tags
+      tags,
+      header
     } = req.body;
     try {
       const task = await Task.findOneAndUpdate({
@@ -33,6 +34,7 @@ module.exports = (app) => {
         description,
         classes,
         tags,
+        header,
         _user: user
       },opts);
       res.send(task);

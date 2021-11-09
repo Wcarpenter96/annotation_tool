@@ -5,6 +5,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import HeaderSelector from "./HeaderSelector";
 import Instructions from "./Instructions";
 import Ontology from "./Ontology";
 import Grid from "@material-ui/core/Grid";
@@ -20,8 +21,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(20),
     fontWeight: theme.typography.fontWeightRegular,
+  },
+  subheading:{
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular
   },
   button: {
     margin: theme.spacing(1),
@@ -40,19 +45,21 @@ export default function Edit() {
   const description = useSelector((state) => state.task.description);
   const classlist = useSelector((state) => state.task.classes);
   const tags = useSelector((state) => state.task.tags);
+  const header = useSelector((state) => state.task.header);
 
   const onSave = () => {
     dispatch(
       saveTask({
         description: description,
         classes: classlist,
-        tags: tags
+        tags: tags,
+        header: header
       })
     );
   };
 
-  const displaySettings = (description, classes, tags) => {
-    return { description, classes, tags };
+  const displaySettings = (description, classes, tags, header) => {
+    return { description, classes, tags, header };
   };
 
   if (description) {
@@ -72,6 +79,23 @@ export default function Edit() {
         </div>
         <Grid container spacing={1}>
           <Grid item md={6}>
+            <Accordion defaultExpanded={true}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>
+                Data
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+              <Typography className={classes.subheading}>
+                Select the data column that you want to display.
+                </Typography>
+              </AccordionDetails>
+               <HeaderSelector />
+            </Accordion>
             <Accordion defaultExpanded={true}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

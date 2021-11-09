@@ -6,6 +6,7 @@ import { FETCH_TASK } from "./types";
 import { UPDATE_DESCRIPTION } from "./types";
 import { UPDATE_CLASSES } from "./types";
 import { UPDATE_TAGS } from "./types";
+import { UPDATE_HEADER } from "./types";
 import { PUT_UNITS } from "./types";
 
 
@@ -24,6 +25,10 @@ export const updateClasses = (classes) => async (dispatch) => {
 
 export const updateTags = (tags) => async (dispatch) => {
   dispatch({ type: UPDATE_TAGS, payload: tags });
+};
+
+export const updateHeader = (header) => async (dispatch) => {
+  dispatch({ type: UPDATE_HEADER, payload: header });
 };
 
 export const saveTask = (values) => async (dispatch) => {

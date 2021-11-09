@@ -30,7 +30,7 @@ const Preview = () => {
     if (description){
     return (
         <ReactImageAnnotate
-            taskDescription='test'
+            taskDescription={false}
             labelImages
             regionClsList={getClasslist()}
             regionTagList={tags}
